@@ -1,0 +1,37 @@
+{
+  "name": "e-book-cross-search",
+  "version": "1.0.0",
+  "description": "電子書籍の横断検索",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn ./src/index.ts",
+    "start": "ts-node --transpile-only ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fj-sh/e-book-cross-search.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fj-sh/e-book-cross-search/issues"
+  },
+  "homepage": "https://github.com/fj-sh/e-book-cross-search#readme",
+  "dependencies": {
+    "playwright-aws-lambda": "^0.7.0",
+    "playwright-core": "^1.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint": "^8.8.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.5.1",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  }
+}
