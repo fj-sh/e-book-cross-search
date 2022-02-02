@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/fj-sh/e-book-cross-search#readme",
   "dependencies": {
+    "express": "^4.17.2",
     "playwright-aws-lambda": "^0.7.0",
     "playwright-core": "^1.18.1"
   },

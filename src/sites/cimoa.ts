@@ -1,4 +1,5 @@
 import * as playwright from 'playwright-aws-lambda'
+import { scroll } from './util'
 
 export const cimoa = () => {
   const URL = 'https://www.cmoa.jp/'
@@ -26,8 +27,11 @@ export const cimoa = () => {
         console.log('[コミックシーモア]条件に一致する商品はみつかりませんでした。')
         return false
       }
+
+      await scroll(page, 3, 1000)
+
       await page.click(FIND_ITEM_SELECTOR)
-      await page.waitForTimeout(3000)
+      await page.waitForTimeout(1000)
       const title = await page.locator(TITLE_SELECTOR).textContent()
 
       const hasTitle = title?.includes(keyword)

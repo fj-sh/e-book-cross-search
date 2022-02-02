@@ -1,4 +1,5 @@
 import * as playwright from 'playwright-aws-lambda'
+import { scroll } from './util'
 
 export const ebookJapan = () => {
   const URL = 'https://ebookjapan.yahoo.co.jp/free/'
@@ -31,9 +32,12 @@ export const ebookJapan = () => {
         console.log('[ebookJapan]ご指定の条件に該当する作品はありませんでした。')
         return false
       }
+
+      await scroll(page, 3, 1000)
+
       await page.click(FIND_ITEM_SELECTOR)
 
-      await page.waitForTimeout(3000)
+      await page.waitForTimeout(1000)
 
       if (await page.locator(ADULT_DESCRIPTION).isVisible()) {
         console.log('[ebookjapan] 18禁のチェック中...')
@@ -42,10 +46,12 @@ export const ebookJapan = () => {
         console.log('[ebookjapan] アダルト漫画ではないので、18禁チェックはありません。')
       }
 
-      await page.waitForTimeout(3000)
+      await page.waitForTimeout(1000)
       const title = await page.locator(TITLE_SELECTOR).textContent()
 
       const hasTitle = title?.includes(keyword)
+
+      await page.waitForTimeout(1000)
       await browser.close()
       return hasTitle
     } catch (error: any) {
