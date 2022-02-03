@@ -8,7 +8,6 @@
 - ブックライブ
 - dブック
 - まんが王国
-- ひかりTVブック
 - ebookjapan
 - コミック.jp
 - kindle unlimited
