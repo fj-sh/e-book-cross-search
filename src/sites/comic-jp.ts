@@ -13,14 +13,14 @@ export const comicJp = () => {
       const context = await browser.newContext()
       const page = await context.newPage()
       await page.goto(comikJpSearchUrl)
-      await page.waitForTimeout(2000)
+      await page.waitForTimeout(4000)
 
       const searchBoxSelector =
         '#headerPC > div > div.search-block > div > div > form > p.input > span > input'
 
       await page.fill(searchBoxSelector, keyword)
       await page.keyboard.press('Enter')
-      await page.waitForTimeout(3000)
+      await page.waitForTimeout(4000)
 
       const searchZeroSeletor = '#__layout > div > div > article > section.main > p'
       if (await page.locator(searchZeroSeletor).isVisible()) {
@@ -35,7 +35,7 @@ export const comicJp = () => {
         '#__layout > div > div > article > section.main > div:nth-child(1) > ul > li:nth-child(1) > a'
 
       await page.click(findItemSelector)
-      await page.waitForTimeout(1000)
+      await page.waitForTimeout(2000)
 
       const titleSelector =
         '#__layout > div > div > div.content.pc-padding > article > section:nth-child(1) > div > h1'
