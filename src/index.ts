@@ -4,8 +4,9 @@ import { kindleUnlimited } from './sites/kindle-unlimited'
 import { mangaOkoku } from './sites/manga-okoku'
 import { comicJp } from './sites/comic-jp'
 import { unext } from './sites/unext'
-import siteSettings from '../site-settings'
 import commandLineArgs from 'command-line-args'
+import { SiteSetting } from '../types/site-setting'
+import siteSettings from '../site-settings'
 
 const sleep = async (ms: number) => {
   await new Promise((resolve) => setTimeout(resolve, ms))
@@ -59,8 +60,29 @@ const collectEbookSites = async () => {
   console.log('[cimoa]', cimoa)
 }
 
-const displayTable = async () => {
-  console.log('siteSettings', siteSettings[0])
+const getSiteSettings = (siteName: string) => {
+  const settings = siteSettings.filter((setting: SiteSetting) => setting.name === siteName)
+  if (settings.length === 0) {
+    throw new Error(`${siteName}は存在しません。正しいサイト名を指定してください。`)
+  }
+  return settings[0]
+}
+
+const displayMarkdownTable = async (siteName: string) => {
+  const siteSetting = getSiteSettings(siteName)
+  console.log(`${siteSetting.unext}`)
+  const table = `
+  | サイト | 掲載有無 | 特徴 |
+  | --- | --- | --- |
+  | KindleUnlimited | ○ | Amazonアカウントがあればすぐに体験できる |
+  | コミック.jp | ○ | 1200円分の無料ポイントがもらえる |
+  | U-NEXT | ○ | 600円分の無料ポイントと動画・雑誌見放題 |
+
+  | まんが王国 | ○ | 無料お試しページが多い |
+  | ebookJapan | ○ | 初回50%オフ。50%分のPayPayポイントがもらえる |
+  | コミックシーモア | ○ | アダルト作品の先行配信がある。読み放題プランがある | 
+  `
+  console.log(table)
 }
 
 const optionDefinitions = [
@@ -82,3 +104,5 @@ const site = options.site ? `${options.site}` : ''
 const format = options.format ? `${options.format}` : 'md'
 
 console.log(`${site} のテーブル情報を ${format} 形式で出力します。`)
+
+displayMarkdownTable(site)
