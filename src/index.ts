@@ -4,6 +4,7 @@ import { kindleUnlimited } from './sites/kindle-unlimited'
 import { mangaOkoku } from './sites/manga-okoku'
 import { comicJp } from './sites/comic-jp'
 import { unext } from './sites/unext'
+import siteSettings from '../site-settings'
 
 const sleep = async (ms: number) => {
   await new Promise((resolve) => setTimeout(resolve, ms))
@@ -39,7 +40,7 @@ const searchUnext = async (keyword: string) => {
   return await searchUnextTitle(keyword)
 }
 
-const main = async () => {
+const collectEbookSites = async () => {
   const keyword = '妻の姉'
 
   const comicJp = await searchComikJp(keyword)
@@ -57,4 +58,8 @@ const main = async () => {
   console.log('[cimoa]', cimoa)
 }
 
-main()
+const displayTable = async () => {
+  console.log('siteSettings', siteSettings[0])
+}
+
+displayTable()
