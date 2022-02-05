@@ -5,6 +5,7 @@ import { mangaOkoku } from './sites/manga-okoku'
 import { comicJp } from './sites/comic-jp'
 import { unext } from './sites/unext'
 import siteSettings from '../site-settings'
+import commandLineArgs from 'command-line-args'
 
 const sleep = async (ms: number) => {
   await new Promise((resolve) => setTimeout(resolve, ms))
@@ -62,4 +63,22 @@ const displayTable = async () => {
   console.log('siteSettings', siteSettings[0])
 }
 
-displayTable()
+const optionDefinitions = [
+  {
+    name: 'site',
+    alias: 's',
+    type: String,
+  },
+  {
+    name: 'format',
+    alias: 'f',
+    type: String,
+  },
+]
+
+const options = commandLineArgs(optionDefinitions)
+
+const site = options.site ? `${options.site}` : ''
+const format = options.format ? `${options.format}` : 'md'
+
+console.log(`${site} のテーブル情報を ${format} 形式で出力します。`)

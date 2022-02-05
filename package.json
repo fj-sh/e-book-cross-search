@@ -19,11 +19,13 @@
   },
   "homepage": "https://github.com/fj-sh/e-book-cross-search#readme",
   "dependencies": {
+    "command-line-args": "^5.2.1",
     "express": "^4.17.2",
     "playwright-aws-lambda": "^0.7.0",
     "playwright-core": "^1.18.1"
   },
   "devDependencies": {
+    "@types/command-line-args": "^5.2.0",
     "@types/node": "^17.0.13",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",

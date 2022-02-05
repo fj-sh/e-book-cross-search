@@ -1,4 +1,4 @@
-// src/site-settings.ts として保存
+// site-settings.ts として保存
 const siteSettings = [
   {
     name: '',
