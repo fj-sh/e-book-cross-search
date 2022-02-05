@@ -10,4 +10,5 @@ export interface SiteSetting {
   cimoa: string
   cimoaImage: string
   mangaokoku: string
+  mangaokokuImage: string
 }

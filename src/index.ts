@@ -7,6 +7,7 @@ import { unext } from './sites/unext'
 import commandLineArgs from 'command-line-args'
 import { SiteSetting } from '../types/site-setting'
 import siteSettings from '../site-settings'
+import { getAmazonUrl, getImageTag } from './sites/util'
 
 const sleep = async (ms: number) => {
   await new Promise((resolve) => setTimeout(resolve, ms))
@@ -68,19 +69,32 @@ const getSiteSettings = (siteName: string) => {
   return settings[0]
 }
 
-const displayMarkdownTable = async (siteName: string) => {
+const displayHtmlTable = (siteName: string) => {}
+
+const displayMarkdownTable = (siteName: string) => {
   const siteSetting = getSiteSettings(siteName)
-  console.log(`${siteSetting.unext}`)
+
+  const amazonLink = getAmazonUrl('東京リベンジャーズ', siteSetting.amazon)
+
   const table = `
   | サイト | 掲載有無 | 特徴 |
   | --- | --- | --- |
-  | KindleUnlimited | ○ | Amazonアカウントがあればすぐに体験できる |
-  | コミック.jp | ○ | 1200円分の無料ポイントがもらえる |
-  | U-NEXT | ○ | 600円分の無料ポイントと動画・雑誌見放題 |
-
-  | まんが王国 | ○ | 無料お試しページが多い |
-  | ebookJapan | ○ | 初回50%オフ。50%分のPayPayポイントがもらえる |
-  | コミックシーモア | ○ | アダルト作品の先行配信がある。読み放題プランがある | 
+  | <a href="${amazonLink}" target="_blank" rel="nofollow">Kindle Unlimited</a> | ○ | Amazonアカウントですぐに30日間無料体験できる |
+  | <a href="${siteSetting.comicJp}" target="_blank" rel="nofollow">コミック.jp ${getImageTag(
+    siteSetting.comicJpImage
+  )}</a> | ○ | 30日間の無料体験。1200円分の無料ポイントがもらえる |
+  | <a href="${siteSetting.unext}" target="_blank" rel="nofollow">U-NEXT ${getImageTag(
+    siteSetting.unextImage
+  )}</a>| ○ | 30日間の無料体験。600円分の無料ポイントと動画・雑誌見放題 |
+  | <a href="${siteSetting.ebookjapan}" target="_blank" rel="nofollow">ebookJapan ${getImageTag(
+    siteSetting.ebookjapanImage
+  )}</a> | ○ | 初回50%オフ。50%分のPayPayポイントがもらえるので実質半額。単品購入ができる。 |
+  | <a href="${
+    siteSetting.cimoa
+  }" target="_blank" rel="nofollow">コミックシーモア </a> | ○ | 先行配信がある。読み放題プランがある | 
+  | <a href="${siteSetting.mangaokoku}" target="_blank" rel="nofollow">まんが王国 ${getImageTag(
+    siteSetting.mangaokokuImage
+  )}</a> | ○ | 毎日ポイントがたまる。無料お試しページが多い |
   `
   console.log(table)
 }
@@ -94,6 +108,11 @@ const optionDefinitions = [
   {
     name: 'format',
     alias: 'f',
+    type: String,
+  },
+  {
+    name: 'keyword',
+    alias: 'k',
     type: String,
   },
 ]
