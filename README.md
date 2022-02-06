@@ -3,7 +3,6 @@
 
 ```console
 npx ts-node src/index.ts -s mangado -f html -k ドラゴンボール
- 
 ```
 
 ## 横断検索のサイト

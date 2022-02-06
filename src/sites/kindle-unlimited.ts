@@ -13,7 +13,7 @@ export const kindleUnlimited = () => {
 
     await page.goto(kindleUnlimitedSearchUrl)
 
-    await page.waitForTimeout(2000)
+    await page.waitForTimeout(3000)
 
     const elementHandle = await page.$$(titleListSelector)
     // 検索したページがキーワードを含んでいるか？

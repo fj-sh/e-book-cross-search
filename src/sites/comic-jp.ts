@@ -21,7 +21,7 @@ export const comicJp = () => {
       console.log('[コミック.jp]ご指定の条件に該当する作品はありませんでした。')
       return
     }
-    await page.waitForTimeout(1000)
+    await page.waitForTimeout(2000)
     await scroll(page, 2, 1000)
     await page.waitForTimeout(1000)
     return
