@@ -1,6 +1,11 @@
 # e-book-cross-search
 電子書籍の横断検索
 
+```console
+npx ts-node src/index.ts -s mangado -f html -k ドラゴンボール
+ 
+```
+
 ## 横断検索のサイト
 
 - U-NEXT
@@ -56,4 +61,58 @@ $ npm run dev -- --src image.png -t 10
 ```console
 $ npx ts-node src/index.ts -s mangafan -f md 
 $ npm run dev -- -s mangafan -f html
+```
+
+
+## switch 文を使わない書き方
+
+https://dev.to/nebrius/a-new-coding-style-for-switch-statements-in-javascript-typescript-ipe
+```js
+const myFunction = () => {
+  // ...
+  return (
+    (body.type === 'isBasic' && doBasicStuff()) ||
+    (body.type === 'isCustom' && doCustomStuff()) ||
+    new Error()
+  );
+};
+```
+
+https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
+
+```js
+function getDrink (type) {
+  var drink;
+  var drinks = {
+    'coke': function () {
+      drink = 'Coke';
+    },
+    'pepsi': function () {
+      drink = 'Pepsi';
+    },
+    'lemonade': function () {
+      drink = 'Lemonade';
+    },
+    'default': function () {
+      drink = 'Default item';
+    }
+  };
+
+  // invoke it
+  (drinks[type] || drinks['default'])();
+
+  // return a String with chosen drink
+  return 'The drink I chose was ' + drink;
+}
+
+var drink = getDrink('coke');
+// The drink I chose was Coke
+console.log(drink);
+```
+
+https://gist.github.com/jonkemp/2c6e1e0f530b2af034a50374532f406f
+
+```js
+
+
 ```

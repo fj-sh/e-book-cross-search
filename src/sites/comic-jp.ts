@@ -24,27 +24,14 @@ export const comicJp = () => {
 
       const searchZeroSeletor = '#__layout > div > div > article > section.main > p'
       if (await page.locator(searchZeroSeletor).isVisible()) {
+        await scroll(page, 3, 1000)
         await browser.close()
         console.log('[コミック.jp]ご指定の条件に該当する作品はありませんでした。')
-        return false
       }
 
       await scroll(page, 3, 1000)
-
-      const findItemSelector =
-        '#__layout > div > div > article > section.main > div:nth-child(1) > ul > li:nth-child(1) > a'
-
-      await page.click(findItemSelector)
-      await page.waitForTimeout(2000)
-
-      const titleSelector =
-        '#__layout > div > div > div.content.pc-padding > article > section:nth-child(1) > div > h1'
-      const title = await page.locator(titleSelector).textContent()
-
-      const hasTitle = title?.includes(keyword)
       await page.waitForTimeout(1000)
       await browser.close()
-      return hasTitle
     } catch (error: any) {
       console.log('[コミック.jp] 例外が発生しました。', error)
       if (browser) {

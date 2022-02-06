@@ -21,20 +21,17 @@ export const kindleUnlimited = () => {
     await page.waitForTimeout(2000)
 
     const elementHandle = await page.$$(titleListSelector)
-
     // 検索したページがキーワードを含んでいるか？
-    let containKeyword = false
     for (const element of elementHandle) {
       const value = await (await element.getProperty('textContent')).jsonValue()
       if (value.includes(keyword)) {
-        containKeyword = true
+        console.log(`"${keyword}"は実在する...!!!`)
       }
     }
 
+    await page.waitForTimeout(1000)
     await scroll(page, 5, 1000)
-
     await browser.close()
-    return containKeyword
   }
 
   return { searchKindleUnlimitedTitle }
